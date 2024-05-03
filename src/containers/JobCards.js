@@ -1,15 +1,19 @@
 import React, { Component, useRef } from "react";
 import { Grid } from "@mui/material";
 import { useSelector, useDispatch } from 'react-redux'
-import { addJobs, addPages, setLoading } from "../store/jobStore";
+import { addJobs, addPages, setLoading, filterJobs } from "../store/jobStore";
 import * as jobAPI from '../api/jobApi'
 import JobCard from "./card";
 const JobCards = () => {
 
+
+    const dispatch = useDispatch();
+
     console.log('Job Rendered');
     const jobs = useSelector((state) => {
-        if (state.jobStore)
-            return state.jobStore.jobs;
+        if (state.jobStore) {
+            return state.jobStore.filteredJobs
+        }
         else
             return [];
     });
@@ -48,7 +52,6 @@ const JobCards = () => {
     //     if (loader.current) observer.observe(loader.current);
     // }, [handleObserver]);
 
-    const dispatch = useDispatch();
 
 
     console.log(jobs, loading);
