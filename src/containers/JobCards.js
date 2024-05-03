@@ -1,9 +1,10 @@
 import React, { Component, useRef } from "react";
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid, LinearProgress } from "@mui/material";
 import { useSelector, useDispatch } from 'react-redux'
 import { addJobs, addPages, setLoading, filterJobs } from "../store/jobStore";
 import * as jobAPI from '../api/jobApi'
 import JobCard from "./card";
+import InfiniteScroll from "react-infinite-scroll-component";
 const JobCards = () => {
 
 
@@ -31,30 +32,25 @@ const JobCards = () => {
             return { limit: 10, offset: 0 }
         }
     });
-
-    // const loader = useRef(null);
-
-    // const handleObserver = React.useCallback((entries) => {
-    //     const target = entries[0];
-    //     if (target.isIntersecting) {
-    //         console.log("Intersecting");
-    //         fetchMoreJobs();
-    //     }
-    // }, []);
-
-    // React.useEffect(() => {
-    //     const option = {
-    //         root: null,
-    //         rootMargin: "50px",
-    //         threshold: 0
-    //     };
-    //     const observer = new IntersectionObserver(handleObserver, option);
-    //     if (loader.current) observer.observe(loader.current);
-    // }, [handleObserver]);
-
-
-
     console.log(jobs, loading);
+
+    const elementRef = React.useRef(null);
+
+    const onIntersection = (entries) => {
+        console.log('Intersection');
+        if (entries[0].isIntersecting) {
+            console.log('Working');
+            // fetchJobs();
+        }
+    }
+
+    React.useEffect(() => {
+        const observer = new IntersectionObserver(onIntersection, { threshold: 0.5 });
+        if (observer && elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+        return () => observer.disconnect();
+    }, [jobs, elementRef.current, loading])
 
     const fetchJobs = async () => {
         if (!loading || jobs.length === 0) {
@@ -71,19 +67,22 @@ const JobCards = () => {
     }, [])
 
 
-    const fetchMoreJobs = () => {
-        fetchJobs();
-    };
-
-
     return (
-        <Grid container spacing={3}>
-            {jobs.map((job) => (
-                <JobCard job={job} />
-            ))}
-            {loading && <h1>Loading...</h1>}
-            {/* <div ref={loader} /> */}
-        </Grid>
+        <InfiniteScroll
+            dataLength={jobs.length}
+            next={() => { console.log('Next'); fetchJobs() }}
+            hasMore={true}
+            loader={<LinearProgress sx={{ width: "100%", marginTop: "30px" }} />}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
+            <Grid container spacing={3}>
+                {jobs.map((job) => (
+                    <JobCard job={job} />
+                ))}
+                {/* {loading && <CircularProgress sx={{ width: "100%" }} />} */}
+                {/* <div ref={elementRef} /> */}
+            </Grid>
+        </InfiniteScroll>
     )
 };
 

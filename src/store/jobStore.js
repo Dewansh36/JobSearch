@@ -70,7 +70,7 @@ export const jobSlice = createSlice({
                     }
                 }
 
-                let roleRegex = new RegExp(state.filter.role.join("|"), "i");
+                let roleRegex = (state.filter.role) ? new RegExp(state.filter.role.join("|"), "i") : null;
                 if (state.filter.role && job.jobRole && !roleRegex.test(job.jobRole)) {
                     return false;
                 }

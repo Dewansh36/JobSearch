@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
 import JobCards from "./JobCards";
 import Filters from "./Filters";

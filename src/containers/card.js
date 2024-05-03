@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, Grid, Chip, Avatar, Stack, Accordion, AccordionSummary } from '@mui/material';
 import { ElectricBolt, ExpandMore, ExpandLess } from '@mui/icons-material';
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, innerRef }) => {
 
     const [expanded, setExpanded] = React.useState(false);
 

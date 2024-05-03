@@ -38,7 +38,7 @@ const Filters = () => {
                 options={departments}
                 groupBy={(option) => option.title} // Group by department title
                 getOptionLabel={(option) => option.value} // Get title of first option within department
-                sx={{ width: 200 }}
+                sx={{ width: { sm: 200, xs: '100%' } }}
                 renderInput={(params) => <TextField {...params} label='Roles' />}
                 onChange={(event, value, detailed) => {
                     console.log('Actual Value', value, detailed);
@@ -51,7 +51,7 @@ const Filters = () => {
                 size="small"
                 style={{ marginInline: 5 }}
                 id="experience-demo"
-                sx={{ width: 100 }}
+                sx={{ width: { sm: 100, xs: '100%' } }}
                 options={experienceOptions}
                 getOptionLabel={(option) => option.title}
 
@@ -65,7 +65,7 @@ const Filters = () => {
                 size="small"
                 style={{ marginInline: 5 }}
                 id="remote-demo"
-                sx={{ width: 100 }}
+                sx={{ width: { sm: 100, xs: '100%' } }}
                 options={remoteOptions}
                 getOptionLabel={(option) => option.title}
 
@@ -79,7 +79,7 @@ const Filters = () => {
                 size="small"
                 style={{ marginInline: 5 }}
                 id="salary-demo"
-                sx={{ width: 100 }}
+                sx={{ width: { sm: 100, xs: '100%' } }}
                 options={salaryOptions}
                 getOptionLabel={(option) => option.title}
 
