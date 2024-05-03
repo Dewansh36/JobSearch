@@ -5,6 +5,7 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 
 function App() {
+  console.log("App rendered");
   return (
     <div className="App">
       <Routes>

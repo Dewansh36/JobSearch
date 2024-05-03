@@ -4,6 +4,7 @@ import React from 'react';
 const baseUrl = 'https://api.weekday.technology/adhoc/getSampleJdJSON';
 
 export const fetchJobs = async (limit = 10, offset = 0) => {
+    console.log('Fetching jobs');
     const jobRequest = buildJobRequest(limit, offset);
     try {
         const response = await fetch(baseUrl, jobRequest);

@@ -9,7 +9,7 @@ export const jobSlice = createSlice({
         totalJobs: 0,
         loading: true,
         filter: {},
-        pagination: { limit: 10, offset: 0 }
+        pagination: { limit: 9, offset: 0 }
     },
     reducers: {
         addJob: (state, action) => {
