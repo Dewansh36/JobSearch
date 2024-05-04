@@ -9,6 +9,7 @@ export const fetchJobs = async (limit = 10, offset = 0) => {
     try {
         const response = await fetch(baseUrl, jobRequest);
         const jobData = await response.json();
+        console.log('Data recieved', jobData);
         return jobData;
     } catch (error) {
         console.log('Error fetching jobs');

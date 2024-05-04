@@ -58,11 +58,13 @@ const JobCards = () => {
             const response = await jobAPI.fetchJobs(pages.limit, pages.offset);
             dispatch(addJobs(response.jdList));
             dispatch(addPages());
+            dispatch(filterJobs());
             dispatch(setLoading(false));
         }
     }
 
     React.useEffect(() => {
+        console.log('Fetching jobs');
         fetchJobs();
     }, [])
 

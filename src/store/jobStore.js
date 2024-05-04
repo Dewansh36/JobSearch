@@ -12,6 +12,13 @@ export const jobSlice = createSlice({
         pagination: { limit: 9, offset: 0 },
     },
     reducers: {
+        addJob: (state, action) => {
+            state.jobs.push(action.payload);
+        },
+        addJobs: (state, action) => {
+            console.log('Adding jobs', action.payload);
+            state.jobs.push(...action.payload);
+        },
         setFilter: (state, action) => {
             console.log("set filter called", action.payload);
             state.pagination.offset = 0;
@@ -82,108 +89,7 @@ export const jobSlice = createSlice({
 
                 return true;
             });
-            console.log("Post Filtering: ", state.filteredJobs);
-        },
-        addJob: (state, action) => {
-            state.jobs.push(action.payload);
-            state.filteredJobs = state.jobs.filter((job) => {
-                if (
-                    state.filter.minExperiance &&
-                    job.minExp &&
-                    job.minExp < state.filter.minExperiance
-                )
-                    return false;
-
-                if (
-                    state.filter.companyName &&
-                    job.companyName &&
-                    !job.companyName
-                        .toLowerCase()
-                        .includes(state.filter.companyName.toLowerCase())
-                )
-                    return false;
-
-                if (
-                    state.filter.techStack &&
-                    job.techStack &&
-                    !job.techStack.some((tech) => state.filter.techStack.includes(tech))
-                )
-                    return false;
-
-                if (
-                    state.filter.location &&
-                    job.location &&
-                    !state.filter.location.includes(job.location)
-                )
-                    return false;
-
-                if (
-                    state.filter.role &&
-                    job.jobRole &&
-                    job.jobRole !== state.filter.role
-                )
-                    return false;
-
-                if (
-                    state.filter.minBasePay &&
-                    job.salary &&
-                    job.salary < state.filter.minBasePay
-                )
-                    return false;
-
-                return true;
-            });
-        },
-        addJobs: (state, action) => {
-            state.jobs.push(...action.payload);
-            state.filteredJobs = state.jobs.filter((job) => {
-                if (
-                    state.filter.minExperiance &&
-                    job.minExp &&
-                    job.minExp < state.filter.minExperiance
-                )
-                    return false;
-
-                if (
-                    state.filter.companyName &&
-                    job.companyName &&
-                    !job.companyName
-                        .toLowerCase()
-                        .includes(state.filter.companyName.toLowerCase())
-                )
-                    return false;
-
-                if (
-                    state.filter.techStack &&
-                    job.techStack &&
-                    !job.techStack.some((tech) => state.filter.techStack.includes(tech))
-                )
-                    return false;
-
-                if (
-                    state.filter.location &&
-                    job.location &&
-                    !state.filter.location.includes(job.location)
-                )
-                    return false;
-
-                if (
-                    state.filter.role &&
-                    job.jobRole &&
-                    job.jobRole !== state.filter.role
-                )
-                    return false;
-
-                if (
-                    state.filter.minBasePay &&
-                    job.salary &&
-                    job.salary < state.filter.minBasePay
-                )
-                    return false;
-
-                return true;
-            });
-        },
+        }
     },
 });
 

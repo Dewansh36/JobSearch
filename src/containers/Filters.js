@@ -51,7 +51,7 @@ const Filters = () => {
                 size="small"
                 style={{ marginInline: 5 }}
                 id="experience-demo"
-                sx={{ width: { sm: 100, xs: '100%' } }}
+                sx={{ width: { sm: 130, xs: '100%' } }}
                 options={experienceOptions}
                 getOptionLabel={(option) => option.title}
 
@@ -65,7 +65,7 @@ const Filters = () => {
                 size="small"
                 style={{ marginInline: 5 }}
                 id="remote-demo"
-                sx={{ width: { sm: 100, xs: '100%' } }}
+                sx={{ width: { sm: 130, xs: '100%' } }}
                 options={remoteOptions}
                 getOptionLabel={(option) => option.title}
 
@@ -79,7 +79,7 @@ const Filters = () => {
                 size="small"
                 style={{ marginInline: 5 }}
                 id="salary-demo"
-                sx={{ width: { sm: 100, xs: '100%' } }}
+                sx={{ width: { sm: 200, xs: '100%' } }}
                 options={salaryOptions}
                 getOptionLabel={(option) => option.title}
 
